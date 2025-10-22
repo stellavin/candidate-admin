@@ -1,0 +1,79 @@
+/* Mobile First 404 Page */
+
+/* Mobile: Compact, readable */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 70vh;
+  text-align: center;
+  padding: var(--spacing-md);
+}
+
+.errorCode {
+  font-size: clamp(3rem, 15vw, 6rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1;
+}
+
+.title {
+  margin-bottom: var(--spacing-sm);
+  font-size: 1.5rem;
+}
+
+.description {
+  max-width: 100%;
+  margin-bottom: var(--spacing-lg);
+  font-size: 0.875rem;
+  padding: 0 var(--spacing-sm);
+}
+
+/* Mobile: Stack buttons vertically */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  width: 100%;
+  max-width: 300px;
+}
+
+.actions > * {
+  width: 100%;
+}
+
+/* Tablet+ (600px+): Better spacing */
+@media (min-width: 600px) {
+  .container {
+    padding: var(--spacing-lg);
+  }
+
+  .errorCode {
+    margin-bottom: var(--spacing-md);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    max-width: 500px;
+    margin-bottom: var(--spacing-xl);
+    font-size: 1rem;
+    padding: 0;
+  }
+
+  /* Tablet+: Horizontal buttons */
+  .actions {
+    flex-direction: row;
+    gap: var(--spacing-md);
+    width: auto;
+    max-width: none;
+  }
+
+  .actions > * {
+    width: auto;
+  }
+}
+

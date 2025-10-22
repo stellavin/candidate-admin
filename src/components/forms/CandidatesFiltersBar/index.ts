@@ -1,0 +1,2 @@
+export { CandidatesFiltersBar } from './CandidatesFiltersBar';
+

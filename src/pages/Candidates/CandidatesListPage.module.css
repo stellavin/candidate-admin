@@ -1,0 +1,46 @@
+/* Mobile First Candidates Page */
+
+.container {
+  width: 100%;
+}
+
+/* Mobile: Compact header */
+.header {
+  margin-bottom: var(--spacing-md);
+}
+
+.title {
+  font-size: 1.5rem;
+}
+
+.description {
+  margin-top: var(--spacing-xs);
+  font-size: 0.875rem;
+}
+
+/* Mobile: Less padding */
+.filtersCard {
+  padding: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Tablet+ (600px+): Better spacing */
+@media (min-width: 600px) {
+  .header {
+    margin-bottom: var(--spacing-lg);
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .filtersCard {
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+  }
+}
+

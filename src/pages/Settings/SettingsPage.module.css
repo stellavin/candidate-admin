@@ -1,0 +1,35 @@
+/* Mobile First Settings Page */
+
+.container {
+  width: 100%;
+}
+
+/* Mobile: Compact title */
+.title {
+  margin-bottom: var(--spacing-lg);
+  font-size: 1.75rem;
+}
+
+.section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.sectionTitle {
+  margin-bottom: var(--spacing-sm);
+}
+
+/* Tablet+ (600px+): Better spacing */
+@media (min-width: 600px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .section {
+    margin-bottom: var(--spacing-xl);
+  }
+
+  .sectionTitle {
+    margin-bottom: var(--spacing-md);
+  }
+}
+

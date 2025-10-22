@@ -1,0 +1,2 @@
+export { TableError } from './TableError';
+

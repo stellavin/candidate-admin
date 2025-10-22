@@ -1,0 +1,236 @@
+/* Global CSS Variables - Mobile First */
+:root {
+  /* Spacing - Mobile base */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 16px;
+  --spacing-xl: 24px;
+  --spacing-xxl: 32px;
+
+  /* Layout - Mobile base */
+  --drawer-width: 280px;
+  --header-height: 56px;
+  --container-padding: 16px;
+  --container-max-width: 100%;
+  --content-spacing: 16px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  /* Transitions */
+  --transition-fast: 150ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+
+  /* Shadows - Lighter on mobile for performance */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.12);
+
+  /* Z-Index */
+  --z-drawer: 1200;
+  --z-appbar: 1100;
+  --z-modal: 1300;
+  --z-tooltip: 1500;
+
+  /* Breakpoints for reference (not used in CSS) */
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 960px;
+  --breakpoint-lg: 1280px;
+  --breakpoint-xl: 1920px;
+}
+
+/* Tablet (sm+) - 600px+ */
+@media (min-width: 600px) {
+  :root {
+    --spacing-md: 16px;
+    --spacing-lg: 20px;
+    --spacing-xl: 28px;
+    --spacing-xxl: 40px;
+    --container-padding: 24px;
+    --content-spacing: 20px;
+  }
+}
+
+/* Desktop (md+) - 960px+ */
+@media (min-width: 960px) {
+  :root {
+    --header-height: 64px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+    --container-padding: 32px;
+    --container-max-width: 1440px;
+    --content-spacing: 24px;
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Large Desktop (lg+) - 1280px+ */
+@media (min-width: 1280px) {
+  :root {
+    --spacing-xxl: 64px;
+    --content-spacing: 32px;
+  }
+}
+
+/* Reset and Base Styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track, #f1f1f1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb, #888);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover, #555);
+}
+
+/* Dark mode scrollbar colors - set via JS based on theme */
+[data-theme='dark'] {
+  --scrollbar-track: #2b2b2b;
+  --scrollbar-thumb: #555;
+  --scrollbar-thumb-hover: #777;
+}
+
+/* Utility Classes - Mobile First */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin: 0 auto;
+  padding-left: var(--container-padding);
+  padding-right: var(--container-padding);
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.grid {
+  display: grid;
+  gap: var(--spacing-md);
+  grid-template-columns: 1fr;
+}
+
+/* Tablet+ */
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  }
+}
+
+/* Desktop+ */
+@media (min-width: 960px) {
+  .grid {
+    gap: var(--spacing-lg);
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Mobile-only utility */
+.mobile-only {
+  display: block;
+}
+
+@media (min-width: 600px) {
+  .mobile-only {
+    display: none;
+  }
+}
+
+/* Tablet+ utility */
+.tablet-up {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .tablet-up {
+    display: block;
+  }
+}
+
+/* Desktop+ utility */
+.desktop-up {
+  display: none;
+}
+
+@media (min-width: 960px) {
+  .desktop-up {
+    display: block;
+  }
+}
+
+/* Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--focus-color, #1976d2);
+  outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+}
+

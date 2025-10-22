@@ -1,0 +1,44 @@
+/* Mobile First Layout */
+
+.root {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+/* Mobile: full width, no sidebar offset */
+.main {
+  flex-grow: 1;
+  min-height: 100vh;
+  width: 100%;
+}
+
+.content {
+  margin-top: var(--content-spacing);
+  margin-bottom: var(--spacing-xl);
+  padding: 0 var(--spacing-md);
+}
+
+/* Tablet+ (600px+): Better spacing */
+@media (min-width: 600px) {
+  .content {
+    padding: 0 var(--spacing-lg);
+  }
+}
+
+/* Desktop+ (960px+): Sidebar layout */
+@media (min-width: 960px) {
+  .root {
+    flex-direction: row;
+  }
+
+  .main {
+    width: calc(100% - var(--drawer-width));
+    margin-left: var(--drawer-width);
+  }
+
+  .content {
+    padding: 0;
+  }
+}
+

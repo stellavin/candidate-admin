@@ -1,0 +1,49 @@
+/* Mobile First Header */
+
+.header {
+  z-index: calc(var(--z-drawer) + 1);
+}
+
+/* Mobile: Hamburger visible, compact spacing */
+.menuButton {
+  margin-right: var(--spacing-sm);
+  display: inline-flex;
+}
+
+.title {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+  transition: opacity var(--transition-fast);
+}
+
+.title:hover {
+  opacity: 0.8;
+}
+
+.spacer {
+  flex-grow: 1;
+}
+
+.themeToggle {
+  margin-right: var(--spacing-xs);
+}
+
+/* Tablet+ (600px+): More spacing */
+@media (min-width: 600px) {
+  .menuButton {
+    margin-right: var(--spacing-md);
+  }
+
+  .themeToggle {
+    margin-right: var(--spacing-sm);
+  }
+}
+
+/* Desktop+ (960px+): Hide hamburger, sidebar is permanent */
+@media (min-width: 960px) {
+  .menuButton {
+    display: none;
+  }
+}
+

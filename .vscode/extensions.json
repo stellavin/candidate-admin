@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "apollographql.vscode-apollo",
+    "styled-components.vscode-styled-components"
+  ]
+}
+
