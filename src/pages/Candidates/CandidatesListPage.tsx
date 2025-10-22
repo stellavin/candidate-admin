@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { Box, Typography, Paper } from '@mui/material';
-import { CandidatesFiltersBar } from '../../components/forms/CandidatesFiltersBar';
+import { Box, Typography } from '@mui/material';
 import { CandidateTable } from '../../components/tables/CandidateTable';
 import { useCandidates } from './hooks/useCandidates';
 import { setSearchParams, parseFiltersFromUrl } from '../../lib/urlState';
@@ -65,13 +64,6 @@ export function CandidatesListPage() {
         </Typography>
       </Box>
 
-      <Paper sx={{ p: 3, mb: 3 }}>
-        <CandidatesFiltersBar
-          initialFirstName={firstName}
-          initialLastName={lastName}
-          onFiltersChange={handleFiltersChange}
-        />
-      </Paper>
 
       <CandidateTable
         candidates={rows}

@@ -8,11 +8,6 @@ export { CandidateTable } from './tables/CandidateTable';
 export { CandidateRow } from './tables/CandidateRow';
 export { TableToolbar } from './tables/TableToolbar';
 
-// Forms
-export * from './forms';
-
-// Feedback
-export * from './feedback';
 
 // Data
 export * from './data';

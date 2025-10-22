@@ -1,7 +1,6 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { AdminLayout } from '@/components';
 import { 
-  DashboardPage, 
   CandidatesListPage, 
   SettingsPage, 
   NotFoundPage 
@@ -12,8 +11,7 @@ export function AppRoutes() {
     <Routes>
       {/* Admin routes with layout */}
       <Route path="/" element={<AdminLayout />}>
-        <Route index element={<Navigate to="/dashboard" replace />} />
-        <Route path="dashboard" element={<DashboardPage />} />
+        <Route index element={<Navigate to="/candidates" replace />} />
         <Route path="candidates" element={<CandidatesListPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>

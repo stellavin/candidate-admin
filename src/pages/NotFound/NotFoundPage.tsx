@@ -50,9 +50,9 @@ export function NotFoundPage() {
           <Button
             variant="contained"
             startIcon={<Home />}
-            onClick={() => navigate('/dashboard')}
+            onClick={() => navigate('/candidates')}
           >
-            Go to Dashboard
+            Go to Candidates
           </Button>
         </Box>
       </Box>

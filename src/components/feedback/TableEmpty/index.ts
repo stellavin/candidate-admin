@@ -1,2 +1,0 @@
-export { TableEmpty } from './TableEmpty';
-

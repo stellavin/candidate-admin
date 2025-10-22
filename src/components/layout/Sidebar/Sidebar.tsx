@@ -1,5 +1,5 @@
 import { Drawer, Toolbar, Box, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
-import { Dashboard, People, Settings } from '@mui/icons-material';
+import { People, Settings } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import { ReactNode } from 'react';
 import { ROUTES } from '@/lib/constants';
@@ -60,12 +60,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
           Main Menu
         </Typography>
         <List className={styles.navList}>
-          <NavItem
-            to={ROUTES.DASHBOARD}
-            icon={<Dashboard />}
-            label="Dashboard"
-            onClick={onClose}
-          />
           <NavItem
             to={ROUTES.CANDIDATES}
             icon={<People />}

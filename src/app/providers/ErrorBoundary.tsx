@@ -53,7 +53,7 @@ export class ErrorBoundary extends Component<Props, State> {
               {this.state.error?.message || 'An unexpected error occurred'}
             </Typography>
             <Button variant="contained" onClick={this.handleReset}>
-              Return to Dashboard
+              Return to Candidates
             </Button>
           </Box>
         </Container>

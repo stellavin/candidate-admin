@@ -5,7 +5,6 @@
 export const APP_NAME = 'Candidate Admin';
 
 export const ROUTES = {
-  DASHBOARD: '/dashboard',
   CANDIDATES: '/candidates',
   SETTINGS: '/settings',
 } as const;
