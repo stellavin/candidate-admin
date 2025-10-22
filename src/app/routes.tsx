@@ -6,17 +6,19 @@ import {
   NotFoundPage 
 } from '@/pages';
 
+/**
+ * Application routing configuration.
+ * Defines all routes and their corresponding components.
+ * @returns {JSX.Element} Configured routes
+ */
 export function AppRoutes() {
   return (
     <Routes>
-      {/* Admin routes with layout */}
       <Route path="/" element={<AdminLayout />}>
         <Route index element={<Navigate to="/candidates" replace />} />
         <Route path="candidates" element={<CandidatesListPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
-      
-      {/* 404 - outside admin layout to avoid duplicate shell */}
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

@@ -1,5 +1,5 @@
 export { CandidateTable } from './CandidateTable';
 export { CandidateRow } from './CandidateRow';
-export { TableToolbar } from './TableToolbar';
+export { TableToolbar, type StatusFilterOption } from './TableToolbar';
 export { TableFooter } from './TableFooter';
 

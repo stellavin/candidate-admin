@@ -19,10 +19,9 @@ interface UseCandidateResult {
 }
 
 /**
- * Custom hook to fetch a single candidate by ID
- * 
- * @param params - Object containing the candidate ID
- * @returns Object containing candidate data, loading state, error, and refetch function
+ * Custom hook to fetch a single candidate by ID.
+ * @param {UseCandidateParams} params - Object containing the candidate ID
+ * @returns {UseCandidateResult} Candidate data, loading state, error, and refetch function
  */
 export function useCandidate({ id }: UseCandidateParams): UseCandidateResult {
   const { data, loading, error, refetch: apolloRefetch } = useQuery<
@@ -32,7 +31,7 @@ export function useCandidate({ id }: UseCandidateParams): UseCandidateResult {
     variables: { id },
     fetchPolicy: 'cache-and-network',
     errorPolicy: 'all',
-    skip: !id, // Skip query if no ID is provided
+    skip: !id,
   });
 
   const refetch = useCallback(() => {

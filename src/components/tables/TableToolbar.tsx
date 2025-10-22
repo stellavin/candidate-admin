@@ -35,6 +35,12 @@ interface TableToolbarProps {
   availableStatuses?: StatusFilterOption[];
 }
 
+/**
+ * Table toolbar component with search and filter capabilities.
+ * Provides search input and status filter dropdown for data tables.
+ * @param {TableToolbarProps} props - Component props
+ * @returns {JSX.Element} Toolbar with search and filters
+ */
 export function TableToolbar({ 
   title, 
   actions, 

@@ -26,6 +26,12 @@ interface UseCandidatesResult {
   refetch: () => void;
 }
 
+/**
+ * Filters candidates by search term matching first name, last name, or full name.
+ * @param {Candidate[]} candidates - Array of candidates to filter
+ * @param {string} searchTerm - Search term to match
+ * @returns {Candidate[]} Filtered candidates
+ */
 function filterCandidatesBySearch(
   candidates: Candidate[],
   searchTerm: string
@@ -49,6 +55,12 @@ function filterCandidatesBySearch(
   });
 }
 
+/**
+ * Filters candidates by status.
+ * @param {Candidate[]} candidates - Array of candidates to filter
+ * @param {string[]} statusFilters - Array of status values to match
+ * @returns {Candidate[]} Filtered candidates
+ */
 function filterCandidatesByStatus(
   candidates: Candidate[],
   statusFilters: string[]
@@ -63,6 +75,11 @@ function filterCandidatesByStatus(
   });
 }
 
+/**
+ * Custom hook for fetching and filtering candidates with pagination.
+ * @param {UseCandidatesParams} params - Hook parameters
+ * @returns {UseCandidatesResult} Candidates data, loading state, and pagination info
+ */
 export function useCandidates({
   page,
   pageSize,
@@ -99,16 +116,10 @@ export function useCandidates({
 
   const allCandidates = data?.listCandidates.items ?? [];
   
-  // Filter candidates based on search term and status
   const filteredCandidates = useMemo(() => {
     let result = allCandidates;
-    
-    // Apply search filter
     result = filterCandidatesBySearch(result, searchTerm);
-    
-    // Apply status filter
     result = filterCandidatesByStatus(result, statusFilters);
-    
     return result;
   }, [allCandidates, searchTerm, statusFilters]);
 

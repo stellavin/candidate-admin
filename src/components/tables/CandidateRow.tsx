@@ -21,16 +21,32 @@ interface CandidateRowProps {
   isSelected?: boolean;
 }
 
+/**
+ * Gets the chip color for a given status.
+ * @param {string} status - The candidate status
+ * @returns {ChipProps['color']} The Material-UI chip color
+ */
 const getStatusColor = (status?: string): ChipProps['color'] => {
   if (!status) return 'default';
   return STATUS_COLOR_MAP[status.toLowerCase()] ?? 'default';
 };
 
+/**
+ * Formats a status string for display.
+ * @param {string} status - The status to format
+ * @returns {string} Formatted status label
+ */
 const formatStatusLabel = (status: string): string => {
   const lower = status.toLowerCase();
   return lower.charAt(0).toUpperCase() + lower.slice(1);
 };
 
+/**
+ * Table row component for displaying a single candidate.
+ * Supports selection and displays candidate information with status chip.
+ * @param {CandidateRowProps} props - Component props
+ * @returns {JSX.Element} Styled table row with candidate data
+ */
 export function CandidateRow({ candidate, rowNumber, onSelect, isSelected }: CandidateRowProps) {
   const handleViewCandidate = (e: React.MouseEvent) => {
     e.stopPropagation();

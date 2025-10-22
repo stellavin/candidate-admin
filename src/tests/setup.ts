@@ -1,13 +1,16 @@
-import { expect, afterEach, vi } from 'vitest';
+import { afterEach, vi } from 'vitest';
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 
-// Cleanup after each test
+/**
+ * Test setup configuration.
+ * Configures cleanup and mocks for testing environment.
+ */
+
 afterEach(() => {
   cleanup();
 });
 
-// Mock window.matchMedia for MUI components
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: vi.fn().mockImplementation((query) => ({
@@ -22,13 +25,13 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 });
 
-// Mock IntersectionObserver
-global.IntersectionObserver = class IntersectionObserver {
-  constructor() {}
+class IntersectionObserverMock {
   disconnect() {}
   observe() {}
   takeRecords() {
     return [];
   }
   unobserve() {}
-} as any;
+}
+
+(globalThis as any).IntersectionObserver = IntersectionObserverMock;

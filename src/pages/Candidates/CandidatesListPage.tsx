@@ -8,15 +8,22 @@ import { useDebounce } from '../../hooks/useDebounce';
 
 const DEFAULT_PAGE_SIZE = 10;
 const INITIAL_PAGE = 0;
-const DEBOUNCE_DELAY = 300; // 300ms debounce delay
+const DEBOUNCE_DELAY = 300;
 
 /**
- * Capitalizes the first letter of a string
+ * Capitalizes the first letter of a string.
+ * @param {string} str - The string to capitalize
+ * @returns {string} The capitalized string
  */
 function capitalizeFirst(str: string): string {
   return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
+/**
+ * Candidates list page component.
+ * Displays a searchable, filterable table of candidates with detail panel.
+ * @returns {JSX.Element} Candidates list page with table and filters
+ */
 export function CandidatesListPage() {
   const [page, setPage] = useState(INITIAL_PAGE);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
@@ -24,7 +31,6 @@ export function CandidatesListPage() {
   const [statusFilters, setStatusFilters] = useState<string[]>([]);
   const [selectedCandidateId, setSelectedCandidateId] = useState<string | null>(null);
   
-  // Debounce the search term to reduce unnecessary filtering
   const debouncedSearchTerm = useDebounce(searchValue, DEBOUNCE_DELAY);
 
   const { rows, loading, error, pageInfo, refetch, allCandidates } = useCandidates({
@@ -34,7 +40,6 @@ export function CandidatesListPage() {
     statusFilters,
   });
 
-  // Extract unique statuses from the API data
   const availableStatuses = useMemo(() => {
     const uniqueStatuses = new Set<string>();
     
@@ -44,7 +49,6 @@ export function CandidatesListPage() {
       }
     });
 
-    // Convert to array and sort alphabetically
     return Array.from(uniqueStatuses)
       .sort()
       .map((status): StatusFilterOption => ({
@@ -53,7 +57,6 @@ export function CandidatesListPage() {
       }));
   }, [allCandidates]);
 
-  // Reset to first page when search term or filters change
   useEffect(() => {
     setPage(INITIAL_PAGE);
   }, [debouncedSearchTerm, statusFilters]);

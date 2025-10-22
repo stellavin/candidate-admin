@@ -11,6 +11,10 @@ interface State {
   error?: Error;
 }
 
+/**
+ * Error boundary component that catches React component errors.
+ * Displays a fallback UI when an error occurs and logs the error details.
+ */
 export class ErrorBoundary extends Component<Props, State> {
   public state: State = {
     hasError: false,

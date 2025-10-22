@@ -1,7 +1,10 @@
 import { createTheme } from '@mui/material/styles';
 import type { PaletteMode } from '@mui/material';
 
-// Design tokens - Mobile First
+/**
+ * Design tokens for consistent theming across the application.
+ * Follows mobile-first approach with responsive breakpoints.
+ */
 export const tokens = {
   spacing: {
     xs: 4,
@@ -65,7 +68,6 @@ export const tokens = {
       },
     },
   },
-  // CSS Custom Properties for components
   cssVars: {
     sidebar: {
       '--sidebar-background': '#D5D0FE',
@@ -87,26 +89,31 @@ export const tokens = {
       '--sidebar-font-weight-active': '600',
     },
   },
-  // Mobile-first breakpoints (matches MUI)
   breakpoints: {
-    xs: 0,      // Mobile phones
-    sm: 600,    // Tablets
-    md: 960,    // Small laptops
-    lg: 1280,   // Desktops
-    xl: 1920,   // Large screens
+    xs: 0,
+    sm: 600,
+    md: 960,
+    lg: 1280,
+    xl: 1920,
   },
 } as const;
 
-// Function to apply CSS custom properties to document root
+/**
+ * Applies CSS custom properties to the document root element.
+ * Should be called once during application initialization.
+ */
 export const applyThemeVars = () => {
   const root = document.documentElement;
-  
-  // Apply sidebar CSS variables
   Object.entries(tokens.cssVars.sidebar).forEach(([property, value]) => {
     root.style.setProperty(property, value);
   });
 };
 
+/**
+ * Creates and returns a Material-UI theme based on the provided palette mode.
+ * @param {PaletteMode} mode - The theme mode ('light' or 'dark')
+ * @returns {Theme} Configured Material-UI theme
+ */
 export const getTheme = (mode: PaletteMode) => createTheme({
   palette: {
     mode,
@@ -125,23 +132,21 @@ export const getTheme = (mode: PaletteMode) => createTheme({
       paper: mode === 'light' ? '#ffffff' : '#1e1e1e',
     },
   },
-  spacing: 8, // Base unit - use theme.spacing(1) = 8px
+  spacing: 8,
   shape: {
     borderRadius: tokens.borderRadius.sm,
   },
-  // Mobile-first breakpoints
   breakpoints: {
     values: {
-      xs: 0,      // Mobile
-      sm: 600,    // Tablet
-      md: 960,    // Desktop
-      lg: 1280,   // Large desktop
-      xl: 1920,   // Extra large
+      xs: 0,
+      sm: 600,
+      md: 960,
+      lg: 1280,
+      xl: 1920,
     },
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
-    // Mobile-first typography (smaller base sizes)
     h1: {
       fontSize: '2rem',
       fontWeight: 500,
@@ -201,7 +206,7 @@ export const getTheme = (mode: PaletteMode) => createTheme({
       defaultProps: {
         margin: 'dense',
         size: 'small',
-        fullWidth: true, // Mobile-first: full width by default
+        fullWidth: true,
       },
     },
     MuiButton: {
@@ -211,14 +216,13 @@ export const getTheme = (mode: PaletteMode) => createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
-          minHeight: 44, // Touch-friendly on mobile
+          minHeight: 44,
         },
       },
     },
     MuiTableCell: {
       styleOverrides: {
         root: ({ theme }) => ({
-          // Mobile: more compact
           padding: theme.spacing(1, 1.5),
           [theme.breakpoints.up('sm')]: {
             padding: theme.spacing(1.5, 2),
@@ -230,7 +234,6 @@ export const getTheme = (mode: PaletteMode) => createTheme({
       styleOverrides: {
         root: ({ theme }) => ({
           boxShadow: tokens.shadows.sm,
-          // Mobile: smaller height
           minHeight: tokens.layout.headerHeight.mobile,
           [theme.breakpoints.up('md')]: {
             minHeight: tokens.layout.headerHeight.desktop,
@@ -258,7 +261,6 @@ export const getTheme = (mode: PaletteMode) => createTheme({
     MuiContainer: {
       styleOverrides: {
         root: ({ theme }) => ({
-          // Mobile: edge-to-edge with minimal padding
           paddingLeft: theme.spacing(2),
           paddingRight: theme.spacing(2),
           [theme.breakpoints.up('sm')]: {

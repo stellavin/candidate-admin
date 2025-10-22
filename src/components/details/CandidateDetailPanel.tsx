@@ -23,11 +23,21 @@ const STATUS_COLOR_MAP: Record<string, ChipProps['color']> = {
   rejected: 'error',
 };
 
+/**
+ * Gets the chip color for a given status.
+ * @param {string} status - The candidate status
+ * @returns {ChipProps['color']} The Material-UI chip color
+ */
 const getStatusColor = (status?: string): ChipProps['color'] => {
   if (!status) return 'default';
   return STATUS_COLOR_MAP[status.toLowerCase()] ?? 'default';
 };
 
+/**
+ * Formats a status string for display.
+ * @param {string} status - The status to format
+ * @returns {string} Formatted status label
+ */
 const formatStatusLabel = (status: string): string => {
   const lower = status.toLowerCase();
   return lower.charAt(0).toUpperCase() + lower.slice(1);
@@ -38,6 +48,12 @@ interface CandidateDetailPanelProps {
   onClose: () => void;
 }
 
+/**
+ * Candidate detail panel component that displays detailed information about a candidate.
+ * Shows loading, error, and success states with candidate information.
+ * @param {CandidateDetailPanelProps} props - Component props
+ * @returns {JSX.Element} Detail panel with candidate information
+ */
 export function CandidateDetailPanel({ candidateId, onClose }: CandidateDetailPanelProps) {
   const { candidate, loading, error, refetch } = useCandidate({ id: candidateId });
 
@@ -104,7 +120,6 @@ export function CandidateDetailPanel({ candidateId, onClose }: CandidateDetailPa
         </IconButton>
       </Box>
 
-      {/* Basic Information */}
       <Box className={styles.section} sx={{ mb: 3 }}>
         <Typography className={styles.sectionTitle}>Details</Typography>
         

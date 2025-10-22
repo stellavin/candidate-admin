@@ -1,4 +1,4 @@
-import { Drawer, Toolbar, Box, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import { Drawer, Box, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { People, Settings } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import { ReactNode } from 'react';
@@ -17,6 +17,11 @@ interface NavItemProps {
   onClick?: () => void;
 }
 
+/**
+ * Navigation item component with active state highlighting.
+ * @param {NavItemProps} props - Component props
+ * @returns {JSX.Element} Styled navigation item
+ */
 function NavItem({ to, icon, label, onClick }: NavItemProps) {
   const location = useLocation();
   const isActive = location.pathname === to || location.pathname.startsWith(`${to}/`);
@@ -42,10 +47,15 @@ function NavItem({ to, icon, label, onClick }: NavItemProps) {
   );
 }
 
+/**
+ * Application sidebar navigation component.
+ * Renders as a temporary drawer on mobile and permanent drawer on desktop.
+ * @param {SidebarProps} props - Component props
+ * @returns {JSX.Element} Responsive sidebar navigation
+ */
 export function Sidebar({ open, onClose }: SidebarProps) {
   const drawerContent = (
     <Box className={styles.drawerContent}>
-      {/* Brand/Logo Section */}
       <Box className={styles.brandSection}>
         <Box className={styles.logoContainer}>
           <Typography className={styles.logoText}>
@@ -54,7 +64,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         </Box>
       </Box>
       
-      {/* Main Navigation */}
       <Box className={styles.navContainer}>
         <Typography variant="overline" className={styles.navLabel}>
           Main Menu
@@ -69,10 +78,8 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         </List>
       </Box>
 
-      {/* Push settings to bottom */}
       <Box className={styles.spacer} />
 
-      {/* Bottom Navigation - Settings */}
       <Box className={styles.bottomNav}>
         <List className={styles.navList}>
           <NavItem
@@ -88,7 +95,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
 
   return (
     <>
-      {/* Mobile drawer */}
       <Drawer
         variant="temporary"
         open={open}
@@ -100,7 +106,6 @@ export function Sidebar({ open, onClose }: SidebarProps) {
         {drawerContent}
       </Drawer>
 
-      {/* Desktop drawer */}
       <Drawer
         variant="permanent"
         className={`${styles.drawer} ${styles.drawerDesktop}`}

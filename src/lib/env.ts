@@ -1,8 +1,9 @@
 /**
- * Environment variable validation and access
- * Validates all required env vars at app startup
+ * Retrieves and validates an environment variable.
+ * @param {string} key - The environment variable key to retrieve
+ * @returns {string} The environment variable value
+ * @throws {Error} If the environment variable is not defined
  */
-
 function getEnvVar(key: string): string {
   const value = import.meta.env[key];
   if (!value) {
@@ -15,6 +16,10 @@ function getEnvVar(key: string): string {
   return value;
 }
 
+/**
+ * Application environment configuration.
+ * Contains validated environment variables and runtime environment flags.
+ */
 export const env = {
   graphqlEndpoint: getEnvVar('VITE_GRAPHQL_ENDPOINT'),
   graphqlApiKey: getEnvVar('VITE_GRAPHQL_API_KEY'),

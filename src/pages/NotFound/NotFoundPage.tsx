@@ -1,8 +1,12 @@
-import React from 'react';
 import { Box, Typography, Button, Container } from '@mui/material';
 import { Home, ArrowBack } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * 404 Not Found page component.
+ * Displays when a user navigates to a non-existent route.
+ * @returns {JSX.Element} 404 error page with navigation options
+ */
 export function NotFoundPage() {
   const navigate = useNavigate();
 

@@ -5,6 +5,11 @@ import { Header } from '../Header';
 import { Sidebar } from '../Sidebar';
 import styles from './AdminLayout.module.css';
 
+/**
+ * Main admin layout component with header, sidebar, and content area.
+ * Handles mobile drawer state for responsive navigation.
+ * @returns {JSX.Element} Admin layout with navigation
+ */
 export function AdminLayout() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -23,7 +28,6 @@ export function AdminLayout() {
 
       <Box component="main" className={styles.main} sx={{ bgcolor: 'background.default' }}>
         <Toolbar />
-        
         <Container maxWidth={false} className={styles.content}>
           <Outlet />
         </Container>

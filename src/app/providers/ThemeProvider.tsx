@@ -13,12 +13,22 @@ const ThemeContext = createContext<ThemeContextType>({
   toggleColorMode: () => {},
 });
 
+/**
+ * Hook to access theme mode and toggle function.
+ * @returns {ThemeContextType} Theme mode and toggle function
+ */
 export const useThemeMode = () => useContext(ThemeContext);
 
 interface ThemeProviderProps {
   children: React.ReactNode;
 }
 
+/**
+ * Theme provider component that manages light/dark mode.
+ * Persists theme preference to localStorage and applies Material-UI theme.
+ * @param {ThemeProviderProps} props - Component props
+ * @returns {JSX.Element} Theme provider with MUI theme
+ */
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const [mode, setMode] = useState<PaletteMode>(() => {
     const stored = safeStorage.getItem('themeMode');

@@ -39,6 +39,12 @@ interface CandidateTableProps {
   selectedCandidateId?: string | null;
 }
 
+/**
+ * Candidate table component with search, filtering, and pagination.
+ * Displays a list of candidates in a table format with interactive features.
+ * @param {CandidateTableProps} props - Component props
+ * @returns {JSX.Element} Candidate table with toolbar and pagination
+ */
 export function CandidateTable({
   candidates,
   loading,

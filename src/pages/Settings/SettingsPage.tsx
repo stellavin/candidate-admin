@@ -2,6 +2,11 @@ import { Box, Typography, Paper, Divider, List, ListItem, ListItemText } from '@
 import { useThemeMode } from '@/app/providers/ThemeProvider';
 import styles from './SettingsPage.module.css';
 
+/**
+ * Settings page component.
+ * Displays application settings including theme, profile, and app information.
+ * @returns {JSX.Element} Settings page with configuration options
+ */
 export function SettingsPage() {
   const { mode } = useThemeMode();
 

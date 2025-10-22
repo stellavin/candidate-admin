@@ -10,6 +10,12 @@ interface TableFooterProps {
   colSpan: number;
 }
 
+/**
+ * Table footer component with pagination controls.
+ * Displays pagination with rows per page selector and page navigation.
+ * @param {TableFooterProps} props - Component props
+ * @returns {JSX.Element} Table footer with pagination
+ */
 export function TableFooter({
   page,
   rowsPerPage,
@@ -19,9 +25,8 @@ export function TableFooter({
   rowsPerPageOptions = [10, 25, 50],
   colSpan,
 }: TableFooterProps) {
-  // Calculate total pages
   const totalPages = totalCount === -1 ? '...' : Math.max(1, Math.ceil(totalCount / rowsPerPage));
-  const currentPage = page + 1; // Convert 0-based to 1-based
+  const currentPage = page + 1;
 
   return (
     <MuiTableFooter>

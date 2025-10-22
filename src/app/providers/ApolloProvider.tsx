@@ -6,6 +6,12 @@ interface ApolloProviderProps {
   children: ReactNode;
 }
 
+/**
+ * Apollo Client Provider wrapper component.
+ * Provides GraphQL client context to the entire application.
+ * @param {ApolloProviderProps} props - Component props
+ * @returns {JSX.Element} Apollo provider with configured client
+ */
 export function ApolloProvider({ children }: ApolloProviderProps) {
   return (
     <BaseApolloProvider client={apolloClient}>

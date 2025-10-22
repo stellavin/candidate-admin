@@ -10,6 +10,11 @@ interface HeaderProps {
   onMenuClick: () => void;
 }
 
+/**
+ * Application header component with navigation menu, theme toggle, and user menu.
+ * @param {HeaderProps} props - Component props
+ * @returns {JSX.Element} Header with navigation controls
+ */
 export function Header({ onMenuClick }: HeaderProps) {
   const { mode, toggleColorMode } = useThemeMode();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -44,7 +49,7 @@ export function Header({ onMenuClick }: HeaderProps) {
         <Typography
           variant="h6"
           component={Link}
-          to={ROUTES.DASHBOARD}
+          to={ROUTES.HOME}
           className={styles.title}
         >
           {APP_NAME}
