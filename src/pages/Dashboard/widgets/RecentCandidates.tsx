@@ -43,7 +43,7 @@ export function RecentCandidates() {
           Recent Candidates
         </Typography>
         <List>
-          {mockCandidates.map((candidate) => (
+          {mockCandidates.slice(0, 3).map((candidate) => (
             <ListItem
               key={candidate.id}
               sx={{

@@ -24,7 +24,7 @@ export function AdminLayout() {
       <Box component="main" className={styles.main} sx={{ bgcolor: 'background.default' }}>
         <Toolbar />
         
-        <Container maxWidth="xl" className={styles.content}>
+        <Container maxWidth={false} className={styles.content}>
           <Outlet />
         </Container>
       </Box>
