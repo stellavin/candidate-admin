@@ -23,7 +23,7 @@
 
 /* Brand Section */
 .brandSection {
-  padding: 24px 20px 20px;
+  padding: 8px 20px 8px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
   background: var(--sidebar-background);
   color: #333;
@@ -80,7 +80,7 @@
   overflow: hidden !important;
   display: flex !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 8px !important;
 }
 
 .navItem::before {
@@ -110,11 +110,12 @@
 }
 
 .navItem.active {
-  background: var(--sidebar-active-background) !important;
+  background: transparent !important;
   color: var(--sidebar-active-text-color) !important;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+  box-shadow: none;
   transform: translateX(0) !important;
-  border-left: var(--sidebar-active-border-left) !important;
+  border-left: 4px solid #8B5CF6 !important;
+  border-radius: 0 !important;
   font-weight: var(--sidebar-font-weight-active) !important;
 }
 
@@ -123,9 +124,9 @@
 }
 
 .navItem.active:hover {
-  background: rgba(139, 92, 246, 0.18) !important;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.2);
-  transform: translateX(1px) !important;
+  background: rgba(139, 92, 246, 0.08) !important;
+  box-shadow: none;
+  transform: translateX(0) !important;
   border-left: 4px solid #7C3AED !important;
 }
 
@@ -136,12 +137,18 @@
   height: var(--sidebar-icon-size) !important;
   color: rgba(0, 0, 0, 0.6);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: var(--sidebar-icon-font-size) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
   flex-shrink: 0 !important;
-  line-height: 1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.icon svg {
+  width: var(--sidebar-icon-font-size) !important;
+  height: var(--sidebar-icon-font-size) !important;
+  display: block !important;
 }
 
 .navItem:hover .icon {
@@ -160,9 +167,11 @@
   letter-spacing: -0.01em !important;
   display: flex !important;
   align-items: center !important;
-  line-height: 1.2 !important;
+  line-height: 1.5 !important;
   flex: 1 !important;
   text-transform: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .navItem.active span {
@@ -194,7 +203,7 @@
 
 @media (min-width: 600px) {
   .brandSection {
-    padding: 28px 24px 24px;
+    padding: 10px 24px 10px;
   }
 
   .logoText {
@@ -224,7 +233,7 @@
   }
 
   .brandSection {
-    padding: 32px 24px 28px;
+    padding: 12px 24px 12px;
   }
 
   .logoText {

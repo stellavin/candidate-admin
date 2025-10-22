@@ -7,52 +7,36 @@ import {
   TableRow,
   Paper,
   Box,
-  TablePagination,
   Skeleton,
   Typography,
 } from '@mui/material';
 import { Candidate } from '../../features/candidates/graphql/types';
 import { CandidateRow } from './CandidateRow';
+import { TableToolbar, StatusFilterOption } from './TableToolbar';
+import { TableFooter } from './TableFooter';
 
-const TABLE_COLUMNS = ['First Name', 'Last Name', 'Email', 'Status'] as const;
+const TABLE_COLUMNS = ['#', 'First Name', 'Last Name', 'Email', 'Status', 'Actions'] as const;
 const COLUMN_COUNT = TABLE_COLUMNS.length;
 const ROWS_PER_PAGE_OPTIONS = [10, 25, 50] as const;
 
-/**
- * Props for the CandidateTable component
- */
 interface CandidateTableProps {
-  /** Array of candidates to display */
   candidates: Candidate[];
-  /** Loading state */
   loading: boolean;
-  /** Error from query */
   error?: Error;
-  /** Current page number (0-based) */
   page: number;
-  /** Number of rows per page */
   pageSize: number;
-  /** Total count of records */
   totalCount: number;
-  /** Whether there is a next page */
   hasNextPage: boolean;
-  /** Callback when page changes */
   onPageChange: (page: number) => void;
-  /** Callback when page size changes */
   onPageSizeChange: (pageSize: number) => void;
-  /** Optional retry callback for error handling */
   onRetry?: () => void;
+  searchValue?: string;
+  onSearchChange?: (value: string) => void;
+  statusFilters?: string[];
+  onStatusFiltersChange?: (filters: string[]) => void;
+  availableStatuses?: StatusFilterOption[];
 }
 
-/**
- * Table component for displaying candidate data with pagination
- * 
- * Features:
- * - Paginated data display
- * - Loading skeletons
- * - Empty state
- * - Responsive design
- */
 export function CandidateTable({
   candidates,
   loading,
@@ -61,6 +45,11 @@ export function CandidateTable({
   hasNextPage,
   onPageChange,
   onPageSizeChange,
+  searchValue = '',
+  onSearchChange,
+  statusFilters = [],
+  onStatusFiltersChange,
+  availableStatuses = [],
 }: CandidateTableProps) {
   const handleChangePage = (_event: unknown, newPage: number) => {
     onPageChange(newPage);
@@ -76,6 +65,15 @@ export function CandidateTable({
   return (
     <Box>
       <TableContainer component={Paper}>
+        <TableToolbar 
+          title=""
+          searchValue={searchValue}
+          onSearchChange={onSearchChange}
+          searchPlaceholder="Search by first or last name..."
+          statusFilters={statusFilters}
+          onStatusFiltersChange={onStatusFiltersChange}
+          availableStatuses={availableStatuses}
+        />
         <Table>
           <TableHead>
             <TableRow>
@@ -116,26 +114,30 @@ export function CandidateTable({
             
             {!loading && candidates.length > 0 && (
               <>
-                {candidates.map((candidate) => (
-                  <CandidateRow key={candidate.id} candidate={candidate} />
+                {candidates.map((candidate, index) => (
+                  <CandidateRow 
+                    key={candidate.id} 
+                    candidate={candidate}
+                    rowNumber={page * pageSize + index + 1}
+                  />
                 ))}
               </>
             )}
           </TableBody>
+          
+          {!loading && candidates.length > 0 && (
+            <TableFooter
+              page={page}
+              rowsPerPage={pageSize}
+              totalCount={totalCount}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              rowsPerPageOptions={ROWS_PER_PAGE_OPTIONS}
+              colSpan={COLUMN_COUNT}
+            />
+          )}
         </Table>
       </TableContainer>
-
-      {!loading && candidates.length > 0 && (
-        <TablePagination
-          component="div"
-          count={totalCount}
-          page={page}
-          onPageChange={handleChangePage}
-          rowsPerPage={pageSize}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-          rowsPerPageOptions={[...ROWS_PER_PAGE_OPTIONS]}
-        />
-      )}
     </Box>
   );
 }

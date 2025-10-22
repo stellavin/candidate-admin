@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 import { useQuery } from '@apollo/client';
 import { LIST_CANDIDATES } from '../../../features/candidates/graphql/queries';
 import {
@@ -7,46 +7,67 @@ import {
   ListCandidatesVariables,
 } from '../../../features/candidates/graphql/types';
 
-/**
- * Parameters for the useCandidates hook
- */
 interface UseCandidatesParams {
-  /** Current page number (0-based) */
   page: number;
-  /** Number of items per page */
   pageSize: number;
+  searchTerm?: string;
+  statusFilters?: string[];
 }
 
-/**
- * Return type for the useCandidates hook
- */
 interface UseCandidatesResult {
-  /** Array of candidate records */
   rows: Candidate[];
-  /** Loading state */
+  allCandidates: Candidate[];
   loading: boolean;
-  /** Error object if query failed */
   error?: Error;
-  /** Pagination information */
   pageInfo: {
-    /** Whether there are more pages available */
     hasNextPage: boolean;
-    /** Total count of items (estimated for infinite pagination) */
     totalCount: number;
   };
-  /** Function to refetch the data */
   refetch: () => void;
 }
 
-/**
- * Custom hook to fetch and manage candidates data with pagination
- * 
- * @param params - Hook parameters
- * @returns Candidates data, loading state, and pagination controls
- */
+function filterCandidatesBySearch(
+  candidates: Candidate[],
+  searchTerm: string
+): Candidate[] {
+  if (!searchTerm.trim()) {
+    return candidates;
+  }
+
+  const searchLower = searchTerm.toLowerCase().trim();
+  
+  return candidates.filter((candidate) => {
+    const firstName = (candidate.firstName || '').toLowerCase();
+    const lastName = (candidate.lastName || '').toLowerCase();
+    const fullName = `${firstName} ${lastName}`.trim();
+    
+    return (
+      firstName.includes(searchLower) ||
+      lastName.includes(searchLower) ||
+      fullName.includes(searchLower)
+    );
+  });
+}
+
+function filterCandidatesByStatus(
+  candidates: Candidate[],
+  statusFilters: string[]
+): Candidate[] {
+  if (statusFilters.length === 0) {
+    return candidates;
+  }
+
+  return candidates.filter((candidate) => {
+    if (!candidate.status) return false;
+    return statusFilters.includes(candidate.status);
+  });
+}
+
 export function useCandidates({
   page,
   pageSize,
+  searchTerm = '',
+  statusFilters = [],
 }: UseCandidatesParams): UseCandidatesResult {
   const [nextTokens, setNextTokens] = useState<(string | undefined)[]>([undefined]);
 
@@ -76,16 +97,31 @@ export function useCandidates({
     apolloRefetch();
   }, [apolloRefetch]);
 
-  const candidates = data?.listCandidates.items ?? [];
+  const allCandidates = data?.listCandidates.items ?? [];
+  
+  // Filter candidates based on search term and status
+  const filteredCandidates = useMemo(() => {
+    let result = allCandidates;
+    
+    // Apply search filter
+    result = filterCandidatesBySearch(result, searchTerm);
+    
+    // Apply status filter
+    result = filterCandidatesByStatus(result, statusFilters);
+    
+    return result;
+  }, [allCandidates, searchTerm, statusFilters]);
+
   const hasNextPage = Boolean(data?.listCandidates.nextToken);
 
   return {
-    rows: candidates,
+    rows: filteredCandidates,
+    allCandidates,
     loading,
     error: error as Error | undefined,
     pageInfo: {
       hasNextPage,
-      totalCount: candidates.length + page * pageSize,
+      totalCount: filteredCandidates.length + page * pageSize,
     },
     refetch,
   };

@@ -27,7 +27,7 @@ export const tokens = {
     slow: '500ms',
   },
   layout: {
-    drawerWidth: 280,
+    drawerWidth: 220,
     headerHeight: {
       mobile: 56,
       desktop: 64,
