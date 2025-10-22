@@ -2,7 +2,9 @@
 
 Admin dashboard for managing candidate applications. React + TypeScript + Material UI + GraphQL.
 
-![Candidate Admin Dashboard](./candidate-admin-screenshot.png)
+![Candidate Admin Dashboard](./images/list.png)
+
+![Candidate Detail View](./images/view.png)
 
 ## View
 
