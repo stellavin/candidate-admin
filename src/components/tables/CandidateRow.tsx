@@ -58,9 +58,9 @@ export function CandidateRow({ candidate, rowNumber }: CandidateRowProps) {
         <Tooltip title="View candidate details">
           <IconButton 
             size="small" 
-            color="primary"
             onClick={handleViewCandidate}
             aria-label={`View ${candidate.firstName} ${candidate.lastName}`}
+            sx={{ color: '#5B21B6', '&:hover': { bgcolor: 'rgba(91, 33, 182, 0.08)' } }}
           >
             <VisibilityIcon fontSize="small" />
           </IconButton>

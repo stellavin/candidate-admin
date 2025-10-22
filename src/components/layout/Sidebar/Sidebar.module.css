@@ -90,7 +90,7 @@
   top: 50%;
   width: 4px;
   height: 0;
-  background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+  background: linear-gradient(135deg, #5B21B6 0%, #4C1D95 100%);
   transform: translateY(-50%);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   border-radius: 0 2px 2px 0;
@@ -100,7 +100,7 @@
 .navItem:hover {
   background: var(--sidebar-hover-background) !important;
   transform: translateX(2px);
-  box-shadow: 0 2px 12px rgba(139, 92, 246, 0.12);
+  box-shadow: 0 2px 12px rgba(91, 33, 182, 0.12);
   border-left: var(--sidebar-hover-border-left);
 }
 
@@ -114,7 +114,7 @@
   color: var(--sidebar-active-text-color) !important;
   box-shadow: none;
   transform: translateX(0) !important;
-  border-left: 4px solid #8B5CF6 !important;
+  border-left: 4px solid #5B21B6 !important;
   border-radius: 0 !important;
   font-weight: var(--sidebar-font-weight-active) !important;
 }
@@ -124,10 +124,10 @@
 }
 
 .navItem.active:hover {
-  background: rgba(139, 92, 246, 0.08) !important;
+  background: rgba(91, 33, 182, 0.08) !important;
   box-shadow: none;
   transform: translateX(0) !important;
-  border-left: 4px solid #7C3AED !important;
+  border-left: 4px solid #5B21B6 !important;
 }
 
 /* Icons */
@@ -152,7 +152,7 @@
 }
 
 .navItem:hover .icon {
-  color: #8B5CF6;
+  color: #5B21B6;
   transform: scale(1.08);
 }
 
