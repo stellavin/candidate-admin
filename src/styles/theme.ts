@@ -64,6 +64,28 @@ export const tokens = {
       },
     },
   },
+  // CSS Custom Properties for components
+  cssVars: {
+    sidebar: {
+      '--sidebar-background': '#D5D0FE',
+      '--sidebar-brand-text': '#5B21B6',
+      '--sidebar-nav-padding': '12px 16px',
+      '--sidebar-nav-min-height': '48px',
+      '--sidebar-nav-border-radius': '8px',
+      '--sidebar-nav-margin': '0 0 4px',
+      '--sidebar-active-background': 'rgba(139, 92, 246, 0.12)',
+      '--sidebar-active-border-left': '4px solid #8B5CF6',
+      '--sidebar-active-text-color': '#8B5CF6',
+      '--sidebar-hover-background': 'rgba(139, 92, 246, 0.08)',
+      '--sidebar-hover-border-left': '2px solid rgba(139, 92, 246, 0.3)',
+      '--sidebar-icon-size': '24px',
+      '--sidebar-icon-font-size': '20px',
+      '--sidebar-font-family': '"Inter", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif',
+      '--sidebar-font-size': '0.875rem',
+      '--sidebar-font-weight-normal': '500',
+      '--sidebar-font-weight-active': '600',
+    },
+  },
   // Mobile-first breakpoints (matches MUI)
   breakpoints: {
     xs: 0,      // Mobile phones
@@ -73,6 +95,16 @@ export const tokens = {
     xl: 1920,   // Large screens
   },
 } as const;
+
+// Function to apply CSS custom properties to document root
+export const applyThemeVars = () => {
+  const root = document.documentElement;
+  
+  // Apply sidebar CSS variables
+  Object.entries(tokens.cssVars.sidebar).forEach(([property, value]) => {
+    root.style.setProperty(property, value);
+  });
+};
 
 export const getTheme = (mode: PaletteMode) => createTheme({
   palette: {

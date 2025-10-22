@@ -1,26 +1,6 @@
 /* Modern Professional Sidebar */
 
-:root {
-  /* Sidebar Theme Variables */
-  --sidebar-background: #D5D0FE;
-  --sidebar-brand-text: #5B21B6;
-  --sidebar-nav-padding: 12px 16px;
-  --sidebar-nav-min-height: 48px;
-  --sidebar-nav-border-radius: 8px;
-  --sidebar-nav-margin: 0 0 4px;
-  --sidebar-active-background: rgba(139, 92, 246, 0.12);
-  --sidebar-active-border-left: 4px solid #8B5CF6;
-  --sidebar-active-text-color: #8B5CF6;
-  --sidebar-hover-background: rgba(139, 92, 246, 0.08);
-  --sidebar-hover-border-left: 2px solid rgba(139, 92, 246, 0.3);
-  --sidebar-icon-size: 24px;
-  --sidebar-icon-font-size: 20px;
-  --sidebar-font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
-  --sidebar-font-size: 0.875rem;
-  --sidebar-font-weight-normal: 500;
-  --sidebar-font-weight-active: 600;
-}
-
+/* Drawer Layout */
 .drawer {
   width: var(--drawer-width);
   flex-shrink: 0;
@@ -55,10 +35,6 @@
   justify-content: center;
 }
 
-.logo {
-  display: none;
-}
-
 .logoText {
   font-family: var(--sidebar-font-family) !important;
   font-size: 1.5rem !important;
@@ -70,16 +46,7 @@
   margin: 0 !important;
 }
 
-.brandName {
-  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif !important;
-  font-size: 1.125rem !important;
-  font-weight: 700 !important;
-  letter-spacing: -0.02em !important;
-  color: white !important;
-  margin: 0 !important;
-}
-
-/* Navigation Container */
+/* Navigation */
 .navContainer {
   padding: 20px 16px 16px;
   overflow-y: auto;
@@ -87,7 +54,7 @@
 }
 
 .navLabel {
-  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--sidebar-font-family) !important;
   font-size: 0.6875rem !important;
   font-weight: 700 !important;
   letter-spacing: 0.1em !important;
@@ -162,6 +129,7 @@
   border-left: 4px solid #7C3AED !important;
 }
 
+/* Icons */
 .icon {
   min-width: var(--sidebar-icon-size) !important;
   width: var(--sidebar-icon-size) !important;
@@ -176,11 +144,6 @@
   line-height: 1 !important;
 }
 
-.activeIcon {
-  color: var(--sidebar-active-text-color) !important;
-  transform: scale(1.1);
-}
-
 .navItem:hover .icon {
   color: #8B5CF6;
   transform: scale(1.08);
@@ -190,6 +153,7 @@
   color: var(--sidebar-active-text-color) !important;
 }
 
+/* Text */
 .navItem span {
   font-size: var(--sidebar-font-size) !important;
   font-weight: var(--sidebar-font-weight-normal) !important;
@@ -206,13 +170,12 @@
   color: var(--sidebar-active-text-color) !important;
 }
 
-/* Spacer to push bottom nav down */
+/* Layout */
 .spacer {
   flex: 1 1 auto;
   min-height: 20px;
 }
 
-/* Bottom Navigation */
 .bottomNav {
   padding: 16px 16px 24px;
   border-top: 1px solid rgba(0, 0, 0, 0.06);
@@ -220,7 +183,7 @@
   flex: 0 0 auto;
 }
 
-/* Mobile: Show temporary drawer only */
+/* Responsive Design */
 .drawerMobile {
   display: block;
 }
@@ -229,7 +192,6 @@
   display: none;
 }
 
-/* Tablet+ (600px+): Better spacing */
 @media (min-width: 600px) {
   .brandSection {
     padding: 28px 24px 24px;
@@ -252,7 +214,6 @@
   }
 }
 
-/* Desktop+ (960px+): Permanent drawer */
 @media (min-width: 960px) {
   .drawerMobile {
     display: none;
@@ -268,10 +229,6 @@
 
   .logoText {
     font-size: 1.75rem !important;
-  }
-
-  .brandName {
-    font-size: 1.25rem !important;
   }
 
   .navContainer {
@@ -292,4 +249,3 @@
     padding: 20px 20px 32px;
   }
 }
-
