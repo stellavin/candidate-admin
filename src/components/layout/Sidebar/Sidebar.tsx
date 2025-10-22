@@ -1,4 +1,4 @@
-import { Drawer, Toolbar, Box, Divider, List, ListSubheader, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
+import { Drawer, Toolbar, Box, List, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { Dashboard, People, Settings } from '@mui/icons-material';
 import { Link, useLocation } from 'react-router-dom';
 import { ReactNode } from 'react';
@@ -28,10 +28,16 @@ function NavItem({ to, icon, label, onClick }: NavItemProps) {
       onClick={onClick}
       className={`${styles.navItem} ${isActive ? styles.active : ''}`}
     >
-      <ListItemIcon className={styles.icon}>
+      <ListItemIcon className={`${styles.icon} ${isActive ? styles.activeIcon : ''}`}>
         {icon}
       </ListItemIcon>
-      <ListItemText primary={label} />
+      <ListItemText 
+        primary={label}
+        primaryTypographyProps={{
+          className: styles.navLabel,
+          fontWeight: isActive ? 600 : 500
+        }}
+      />
     </ListItemButton>
   );
 }
@@ -39,10 +45,21 @@ function NavItem({ to, icon, label, onClick }: NavItemProps) {
 export function Sidebar({ open, onClose }: SidebarProps) {
   const drawerContent = (
     <Box className={styles.drawerContent}>
-      <Toolbar />
+      {/* Brand/Logo Section */}
+      <Box className={styles.brandSection}>
+        <Box className={styles.logoContainer}>
+          <Typography className={styles.logoText}>
+            Popp
+          </Typography>
+        </Box>
+      </Box>
       
+      {/* Main Navigation */}
       <Box className={styles.navContainer}>
-        <List>
+        <Typography variant="overline" className={styles.navLabel}>
+          Main Menu
+        </Typography>
+        <List className={styles.navList}>
           <NavItem
             to={ROUTES.DASHBOARD}
             icon={<Dashboard />}
@@ -56,10 +73,14 @@ export function Sidebar({ open, onClose }: SidebarProps) {
             onClick={onClose}
           />
         </List>
+      </Box>
 
-        <Divider className={styles.divider} />
+      {/* Push settings to bottom */}
+      <Box className={styles.spacer} />
 
-        <List>
+      {/* Bottom Navigation - Settings */}
+      <Box className={styles.bottomNav}>
+        <List className={styles.navList}>
           <NavItem
             to={ROUTES.SETTINGS}
             icon={<Settings />}
