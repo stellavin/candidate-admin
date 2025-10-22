@@ -1,57 +1,28 @@
-import React, { useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { Box, Typography } from '@mui/material';
 import { CandidateTable } from '../../components/tables/CandidateTable';
 import { useCandidates } from './hooks/useCandidates';
-import { setSearchParams, parseFiltersFromUrl } from '../../lib/urlState';
+
+const DEFAULT_PAGE_SIZE = 10;
+const INITIAL_PAGE = 0;
 
 export function CandidatesListPage() {
-  const initialFilters = parseFiltersFromUrl();
-  
-  const [firstName, setFirstName] = useState(initialFilters.firstName);
-  const [lastName, setLastName] = useState(initialFilters.lastName);
-  const [page, setPage] = useState(initialFilters.page - 1); // 0-based for MUI
-  const [pageSize, setPageSize] = useState(10);
+  const [page, setPage] = useState(INITIAL_PAGE);
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
 
   const { rows, loading, error, pageInfo, refetch } = useCandidates({
-    firstName,
-    lastName,
     page,
     pageSize,
   });
 
-  const handleFiltersChange = useCallback(
-    (filters: { firstName: string; lastName: string }) => {
-      setFirstName(filters.firstName);
-      setLastName(filters.lastName);
-      setPage(0);
-      
-      setSearchParams({
-        first: filters.firstName,
-        last: filters.lastName,
-        page: 1,
-      });
-    },
-    []
-  );
-
   const handlePageChange = useCallback((newPage: number) => {
     setPage(newPage);
-    setSearchParams({
-      first: firstName,
-      last: lastName,
-      page: newPage + 1,
-    });
-  }, [firstName, lastName]);
+  }, []);
 
   const handlePageSizeChange = useCallback((newPageSize: number) => {
     setPageSize(newPageSize);
-    setPage(0);
-    setSearchParams({
-      first: firstName,
-      last: lastName,
-      page: 1,
-    });
-  }, [firstName, lastName]);
+    setPage(INITIAL_PAGE);
+  }, []);
 
   return (
     <Box>

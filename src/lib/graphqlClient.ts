@@ -3,7 +3,6 @@ import { onError } from '@apollo/client/link/error';
 import { env } from './env';
 import { logger } from './logger';
 
-// Error handling link
 const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach(({ message, locations, path, extensions }) => {
@@ -24,7 +23,6 @@ const errorLink = onError(({ graphQLErrors, networkError, operation }) => {
   }
 });
 
-// Authentication link
 const authLink = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
@@ -34,7 +32,6 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-// HTTP link
 const httpLink = new HttpLink({
   uri: env.graphqlEndpoint,
 });
@@ -46,7 +43,6 @@ export const apolloClient = new ApolloClient({
       Query: {
         fields: {
           listCandidates: {
-            // Don't cache by default to always get fresh data
             keyArgs: ['firstName', 'lastName'],
           },
         },

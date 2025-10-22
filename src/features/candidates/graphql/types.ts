@@ -1,18 +1,21 @@
 /**
- * GraphQL types for candidates
+ * GraphQL types for candidates feature
  */
 
+/**
+ * Represents a candidate in the system
+ */
 export interface Candidate {
   id: string;
   firstName?: string;
   lastName?: string;
   email?: string;
-  role?: string;
-  appliedDate?: string;
-  experience?: number;
   status?: string;
 }
 
+/**
+ * Response type for listCandidates query
+ */
 export interface ListCandidatesResponse {
   listCandidates: {
     items: Candidate[];
@@ -20,9 +23,10 @@ export interface ListCandidatesResponse {
   };
 }
 
+/**
+ * Variables for listCandidates query
+ */
 export interface ListCandidatesVariables {
-  firstName?: string;
-  lastName?: string;
   limit?: number;
   nextToken?: string;
 }

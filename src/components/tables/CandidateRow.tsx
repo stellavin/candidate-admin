@@ -1,34 +1,43 @@
-import React from 'react';
 import { TableRow, TableCell, Chip } from '@mui/material';
+import type { ChipProps } from '@mui/material';
 import { Candidate } from '../../features/candidates/graphql/types';
+
+const EMPTY_VALUE = '-';
+
+const STATUS_COLOR_MAP: Record<string, ChipProps['color']> = {
+  active: 'success',
+  approved: 'success',
+  pending: 'warning',
+  rejected: 'error',
+};
 
 interface CandidateRowProps {
   candidate: Candidate;
 }
 
-export function CandidateRow({ candidate }: CandidateRowProps) {
-  const formatDate = (dateString?: string) => {
-    if (!dateString) return '-';
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
-  };
+const getStatusColor = (status?: string): ChipProps['color'] => {
+  if (!status) return 'default';
+  return STATUS_COLOR_MAP[status.toLowerCase()] ?? 'default';
+};
 
+export function CandidateRow({ candidate }: CandidateRowProps) {
   return (
     <TableRow hover>
-      <TableCell>{candidate.firstName || '-'}</TableCell>
-      <TableCell>{candidate.lastName || '-'}</TableCell>
-      <TableCell>{candidate.email || '-'}</TableCell>
+      <TableCell>{candidate.firstName ?? EMPTY_VALUE}</TableCell>
+      <TableCell>{candidate.lastName ?? EMPTY_VALUE}</TableCell>
+      <TableCell>{candidate.email ?? EMPTY_VALUE}</TableCell>
       <TableCell>
-        {candidate.role ? (
-          <Chip label={candidate.role} size="small" color="primary" variant="outlined" />
+        {candidate.status ? (
+          <Chip 
+            label={candidate.status} 
+            size="small" 
+            color={getStatusColor(candidate.status)} 
+            variant="outlined" 
+          />
         ) : (
-          '-'
+          EMPTY_VALUE
         )}
       </TableCell>
-      <TableCell>{formatDate(candidate.appliedDate)}</TableCell>
     </TableRow>
   );
 }

@@ -15,16 +15,9 @@ function getEnvVar(key: string): string {
   return value;
 }
 
-function getOptionalEnvVar(key: string, defaultValue: string): string {
-  return import.meta.env[key] || defaultValue;
-}
-
 export const env = {
-  // Required
   graphqlEndpoint: getEnvVar('VITE_GRAPHQL_ENDPOINT'),
   graphqlApiKey: getEnvVar('VITE_GRAPHQL_API_KEY'),
-  
-  // Optional with defaults
   isDevelopment: import.meta.env.DEV,
   isProduction: import.meta.env.PROD,
   mode: import.meta.env.MODE,

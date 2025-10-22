@@ -1,15 +1,18 @@
 import { gql } from '@apollo/client';
 
+/**
+ * GraphQL query to fetch a paginated list of candidates
+ * 
+ * @param limit - Maximum number of candidates to return (optional)
+ * @param nextToken - Token for pagination (optional)
+ * @returns List of candidates with pagination token
+ */
 export const LIST_CANDIDATES = gql`
   query ListCandidates(
-    $firstName: String
-    $lastName: String
     $limit: Int
     $nextToken: String
   ) {
     listCandidates(
-      firstName: $firstName
-      lastName: $lastName
       limit: $limit
       nextToken: $nextToken
     ) {
@@ -18,9 +21,6 @@ export const LIST_CANDIDATES = gql`
         firstName
         lastName
         email
-        role
-        appliedDate
-        experience
         status
       }
       nextToken

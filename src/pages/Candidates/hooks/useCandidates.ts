@@ -7,60 +7,61 @@ import {
   ListCandidatesVariables,
 } from '../../../features/candidates/graphql/types';
 
+/**
+ * Parameters for the useCandidates hook
+ */
 interface UseCandidatesParams {
-  firstName?: string;
-  lastName?: string;
+  /** Current page number (0-based) */
   page: number;
+  /** Number of items per page */
   pageSize: number;
 }
 
+/**
+ * Return type for the useCandidates hook
+ */
 interface UseCandidatesResult {
+  /** Array of candidate records */
   rows: Candidate[];
+  /** Loading state */
   loading: boolean;
+  /** Error object if query failed */
   error?: Error;
+  /** Pagination information */
   pageInfo: {
+    /** Whether there are more pages available */
     hasNextPage: boolean;
+    /** Total count of items (estimated for infinite pagination) */
     totalCount: number;
   };
+  /** Function to refetch the data */
   refetch: () => void;
 }
 
+/**
+ * Custom hook to fetch and manage candidates data with pagination
+ * 
+ * @param params - Hook parameters
+ * @returns Candidates data, loading state, and pagination controls
+ */
 export function useCandidates({
-  firstName,
-  lastName,
   page,
   pageSize,
 }: UseCandidatesParams): UseCandidatesResult {
   const [nextTokens, setNextTokens] = useState<(string | undefined)[]>([undefined]);
 
-  // Build query variables
-  const variables: ListCandidatesVariables = {
-    limit: pageSize,
-    nextToken: nextTokens[page],
-  };
-
-  if (firstName) {
-    variables.firstName = firstName;
-  }
-
-  if (lastName) {
-    variables.lastName = lastName;
-  }
-
   const { data, loading, error, refetch: apolloRefetch } = useQuery<
     ListCandidatesResponse,
     ListCandidatesVariables
   >(LIST_CANDIDATES, {
-    variables,
+    variables: {
+      limit: pageSize,
+      nextToken: nextTokens[page],
+    },
     fetchPolicy: 'network-only',
+    errorPolicy: 'all',
   });
 
-  // Reset pagination when filters change
-  useEffect(() => {
-    setNextTokens([undefined]);
-  }, [firstName, lastName]);
-
-  // Store next tokens for pagination
   useEffect(() => {
     if (data?.listCandidates.nextToken) {
       setNextTokens((prev) => {
@@ -75,13 +76,16 @@ export function useCandidates({
     apolloRefetch();
   }, [apolloRefetch]);
 
+  const candidates = data?.listCandidates.items ?? [];
+  const hasNextPage = Boolean(data?.listCandidates.nextToken);
+
   return {
-    rows: data?.listCandidates.items || [],
+    rows: candidates,
     loading,
     error: error as Error | undefined,
     pageInfo: {
-      hasNextPage: !!data?.listCandidates.nextToken,
-      totalCount: (data?.listCandidates.items.length || 0) + page * pageSize,
+      hasNextPage,
+      totalCount: candidates.length + page * pageSize,
     },
     refetch,
   };
