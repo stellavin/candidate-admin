@@ -15,6 +15,8 @@ import {
   Divider,
   Button,
   Tooltip,
+  Badge,
+  Chip,
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -22,6 +24,7 @@ import FilterListIcon from '@mui/icons-material/FilterList';
 export interface StatusFilterOption {
   value: string;
   label: string;
+  count?: number;
 }
 
 interface TableToolbarProps {
@@ -33,6 +36,7 @@ interface TableToolbarProps {
   statusFilters?: string[];
   onStatusFiltersChange?: (filters: string[]) => void;
   availableStatuses?: StatusFilterOption[];
+  totalCount?: number;
 }
 
 /**
@@ -50,8 +54,19 @@ export function TableToolbar({
   statusFilters = [],
   onStatusFiltersChange,
   availableStatuses = [],
+  totalCount,
 }: TableToolbarProps) {
   const [filterAnchorEl, setFilterAnchorEl] = useState<HTMLButtonElement | null>(null);
+  
+  // Extract counts for specific statuses
+  const getStatusCount = (status: string) => {
+    const statusOption = availableStatuses.find(s => s.value.toLowerCase() === status.toLowerCase());
+    return statusOption?.count || 0;
+  };
+  
+  const shortlistedCount = getStatusCount('shortlisted');
+  const appliedCount = getStatusCount('applied');
+  const rejectedCount = getStatusCount('rejected');
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearchChange?.(event.target.value);
@@ -134,6 +149,36 @@ export function TableToolbar({
       <Box sx={{ flex: '0 0 auto', ml: 'auto', display: 'flex', gap: 1, alignItems: 'center' }}>
         {actions}
         
+        {/* Status badges */}
+        {totalCount !== undefined && (
+          <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center' }}>
+            <Chip 
+              label={`Total: ${totalCount}`} 
+              size="small" 
+              color="default"
+              variant="outlined"
+            />
+            <Chip 
+              label={`Shortlisted: ${shortlistedCount}`} 
+              size="small" 
+              color="info"
+              variant="outlined"
+            />
+            <Chip 
+              label={`Applied: ${appliedCount}`} 
+              size="small" 
+              color="primary"
+              variant="outlined"
+            />
+            <Chip 
+              label={`Rejected: ${rejectedCount}`} 
+              size="small" 
+              color="error"
+              variant="outlined"
+            />
+          </Box>
+        )}
+        
         {onStatusFiltersChange && availableStatuses.length > 0 && (
           <>
             <Tooltip title="Filter by status">
@@ -142,7 +187,13 @@ export function TableToolbar({
                 color={hasActiveFilters ? 'primary' : 'default'}
                 size="small"
               >
-                <FilterListIcon />
+                <Badge 
+                  badgeContent={hasActiveFilters ? statusFilters.length : 0} 
+                  color="primary"
+                  invisible={!hasActiveFilters}
+                >
+                  <FilterListIcon />
+                </Badge>
               </IconButton>
             </Tooltip>
             
@@ -189,7 +240,10 @@ export function TableToolbar({
                           disableRipple
                           size="small"
                         />
-                        <ListItemText primary={status.label} />
+                        <ListItemText 
+                          primary={status.label}
+                          secondary={status.count !== undefined ? `${status.count} candidate${status.count !== 1 ? 's' : ''}` : undefined}
+                        />
                       </ListItemButton>
                     </ListItem>
                   ))}

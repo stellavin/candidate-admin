@@ -37,6 +37,7 @@ interface CandidateTableProps {
   availableStatuses?: StatusFilterOption[];
   onCandidateSelect?: (candidateId: string) => void;
   selectedCandidateId?: string | null;
+  allCandidatesCount?: number;
 }
 
 /**
@@ -60,6 +61,7 @@ export function CandidateTable({
   availableStatuses = [],
   onCandidateSelect,
   selectedCandidateId,
+  allCandidatesCount,
 }: CandidateTableProps) {
   const handleChangePage = (_event: unknown, newPage: number) => {
     onPageChange(newPage);
@@ -83,6 +85,7 @@ export function CandidateTable({
           statusFilters={statusFilters}
           onStatusFiltersChange={onStatusFiltersChange}
           availableStatuses={availableStatuses}
+          totalCount={allCandidatesCount}
         />
         <Table>
           <TableHead>

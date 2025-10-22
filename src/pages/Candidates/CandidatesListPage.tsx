@@ -41,19 +41,20 @@ export function CandidatesListPage() {
   });
 
   const availableStatuses = useMemo(() => {
-    const uniqueStatuses = new Set<string>();
+    const statusCounts = new Map<string, number>();
     
     allCandidates.forEach((candidate) => {
       if (candidate.status) {
-        uniqueStatuses.add(candidate.status);
+        statusCounts.set(candidate.status, (statusCounts.get(candidate.status) || 0) + 1);
       }
     });
 
-    return Array.from(uniqueStatuses)
-      .sort()
-      .map((status): StatusFilterOption => ({
+    return Array.from(statusCounts.entries())
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([status, count]): StatusFilterOption => ({
         value: status,
         label: capitalizeFirst(status),
+        count,
       }));
   }, [allCandidates]);
 
@@ -117,6 +118,7 @@ export function CandidatesListPage() {
             availableStatuses={availableStatuses}
             onCandidateSelect={handleCandidateSelect}
             selectedCandidateId={selectedCandidateId}
+            allCandidatesCount={allCandidates.length}
           />
         </Grid>
         
