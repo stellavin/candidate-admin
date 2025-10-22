@@ -2,6 +2,18 @@
 
 Admin dashboard for managing candidate applications. React + TypeScript + Material UI + GraphQL.
 
+![Candidate Admin Dashboard](./candidate-admin-screenshot.png)
+
+## View
+
+The application features a modern, responsive interface with:
+
+- **Left Sidebar Navigation**: Branded "Popp" interface with main menu and settings
+- **Candidates List View**: Table showing candidate information with search and filtering capabilities
+- **Candidate Detail Panel**: Right-side panel displaying detailed candidate information when selected
+- **Status Management**: Color-coded status tags (Shortlisted, Applied, Rejected) for easy visual identification
+- **Responsive Design**: Mobile-friendly with hamburger menu and adaptive layout
+
 ## Project Structure
 
 ```
