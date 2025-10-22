@@ -14,6 +14,25 @@ export interface Candidate {
 }
 
 /**
+ * Represents a detailed candidate with all available information
+ */
+export interface CandidateDetail extends Candidate {
+  phone?: string;
+  address?: string;
+  city?: string;
+  state?: string;
+  zipCode?: string;
+  country?: string;
+  resume?: string;
+  coverLetter?: string;
+  portfolio?: string;
+  linkedIn?: string;
+  github?: string;
+  appliedDate?: string;
+  notes?: string;
+}
+
+/**
  * Response type for listCandidates query
  */
 export interface ListCandidatesResponse {
@@ -29,5 +48,19 @@ export interface ListCandidatesResponse {
 export interface ListCandidatesVariables {
   limit?: number;
   nextToken?: string;
+}
+
+/**
+ * Response type for getCandidate query
+ */
+export interface GetCandidateResponse {
+  getCandidate: CandidateDetail;
+}
+
+/**
+ * Variables for getCandidate query
+ */
+export interface GetCandidateVariables {
+  id: string;
 }
 

@@ -1,7 +1,8 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
-import { Box, Typography } from '@mui/material';
+import { Box, Typography, Grid } from '@mui/material';
 import { CandidateTable } from '../../components/tables/CandidateTable';
 import { StatusFilterOption } from '../../components/tables/TableToolbar';
+import { CandidateDetailPanel } from '../../components/details';
 import { useCandidates } from './hooks/useCandidates';
 import { useDebounce } from '../../hooks/useDebounce';
 
@@ -21,6 +22,7 @@ export function CandidatesListPage() {
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [searchValue, setSearchValue] = useState('');
   const [statusFilters, setStatusFilters] = useState<string[]>([]);
+  const [selectedCandidateId, setSelectedCandidateId] = useState<string | null>(null);
   
   // Debounce the search term to reduce unnecessary filtering
   const debouncedSearchTerm = useDebounce(searchValue, DEBOUNCE_DELAY);
@@ -73,6 +75,14 @@ export function CandidatesListPage() {
     setStatusFilters(filters);
   }, []);
 
+  const handleCandidateSelect = useCallback((candidateId: string) => {
+    setSelectedCandidateId(candidateId);
+  }, []);
+
+  const handleCloseDetail = useCallback(() => {
+    setSelectedCandidateId(null);
+  }, []);
+
   return (
     <Box>
       <Box sx={{ mb: 3 }}>
@@ -84,24 +94,38 @@ export function CandidatesListPage() {
         </Typography>
       </Box>
 
-
-      <CandidateTable
-        candidates={rows}
-        loading={loading}
-        error={error}
-        page={page}
-        pageSize={pageSize}
-        totalCount={pageInfo.totalCount}
-        hasNextPage={pageInfo.hasNextPage}
-        onPageChange={handlePageChange}
-        onPageSizeChange={handlePageSizeChange}
-        onRetry={refetch}
-        searchValue={searchValue}
-        onSearchChange={handleSearchChange}
-        statusFilters={statusFilters}
-        onStatusFiltersChange={handleStatusFiltersChange}
-        availableStatuses={availableStatuses}
-      />
+      <Grid container spacing={2}>
+        <Grid item xs={12} md={selectedCandidateId ? 8 : 12}>
+          <CandidateTable
+            candidates={rows}
+            loading={loading}
+            error={error}
+            page={page}
+            pageSize={pageSize}
+            totalCount={pageInfo.totalCount}
+            hasNextPage={pageInfo.hasNextPage}
+            onPageChange={handlePageChange}
+            onPageSizeChange={handlePageSizeChange}
+            onRetry={refetch}
+            searchValue={searchValue}
+            onSearchChange={handleSearchChange}
+            statusFilters={statusFilters}
+            onStatusFiltersChange={handleStatusFiltersChange}
+            availableStatuses={availableStatuses}
+            onCandidateSelect={handleCandidateSelect}
+            selectedCandidateId={selectedCandidateId}
+          />
+        </Grid>
+        
+        {selectedCandidateId && (
+          <Grid item xs={12} md={4}>
+            <CandidateDetailPanel 
+              candidateId={selectedCandidateId}
+              onClose={handleCloseDetail}
+            />
+          </Grid>
+        )}
+      </Grid>
     </Box>
   );
 }

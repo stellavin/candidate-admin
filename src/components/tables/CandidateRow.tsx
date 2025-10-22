@@ -17,6 +17,8 @@ const STATUS_COLOR_MAP: Record<string, ChipProps['color']> = {
 interface CandidateRowProps {
   candidate: Candidate;
   rowNumber: number;
+  onSelect?: (candidateId: string) => void;
+  isSelected?: boolean;
 }
 
 const getStatusColor = (status?: string): ChipProps['color'] => {
@@ -29,14 +31,32 @@ const formatStatusLabel = (status: string): string => {
   return lower.charAt(0).toUpperCase() + lower.slice(1);
 };
 
-export function CandidateRow({ candidate, rowNumber }: CandidateRowProps) {
-  const handleViewCandidate = () => {
-    // TODO: Navigate to candidate detail page
-    console.log('View candidate:', candidate.id);
+export function CandidateRow({ candidate, rowNumber, onSelect, isSelected }: CandidateRowProps) {
+  const handleViewCandidate = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (onSelect) {
+      onSelect(candidate.id);
+    }
+  };
+
+  const handleRowClick = () => {
+    if (onSelect) {
+      onSelect(candidate.id);
+    }
   };
 
   return (
-    <TableRow hover>
+    <TableRow 
+      hover 
+      onClick={handleRowClick}
+      sx={{ 
+        cursor: onSelect ? 'pointer' : 'default',
+        backgroundColor: isSelected ? 'rgba(91, 33, 182, 0.08)' : 'inherit',
+        '&:hover': {
+          backgroundColor: isSelected ? 'rgba(91, 33, 182, 0.12)' : undefined,
+        }
+      }}
+    >
       <TableCell sx={{ width: 60, fontWeight: 500, color: 'text.secondary' }}>
         {rowNumber}
       </TableCell>

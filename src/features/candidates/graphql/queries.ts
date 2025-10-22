@@ -28,3 +28,21 @@ export const LIST_CANDIDATES = gql`
   }
 `;
 
+/**
+ * GraphQL query to fetch a single candidate by ID
+ * 
+ * @param id - Candidate ID
+ * @returns Detailed candidate information
+ */
+export const GET_CANDIDATE = gql`
+  query GetCandidate($id: ID!) {
+    getCandidate(id: $id) {
+      id
+      firstName
+      lastName
+      email
+      status
+    }
+  }
+`;
+

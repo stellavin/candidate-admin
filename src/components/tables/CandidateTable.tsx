@@ -35,6 +35,8 @@ interface CandidateTableProps {
   statusFilters?: string[];
   onStatusFiltersChange?: (filters: string[]) => void;
   availableStatuses?: StatusFilterOption[];
+  onCandidateSelect?: (candidateId: string) => void;
+  selectedCandidateId?: string | null;
 }
 
 export function CandidateTable({
@@ -50,6 +52,8 @@ export function CandidateTable({
   statusFilters = [],
   onStatusFiltersChange,
   availableStatuses = [],
+  onCandidateSelect,
+  selectedCandidateId,
 }: CandidateTableProps) {
   const handleChangePage = (_event: unknown, newPage: number) => {
     onPageChange(newPage);
@@ -119,6 +123,8 @@ export function CandidateTable({
                     key={candidate.id} 
                     candidate={candidate}
                     rowNumber={page * pageSize + index + 1}
+                    onSelect={onCandidateSelect}
+                    isSelected={selectedCandidateId === candidate.id}
                   />
                 ))}
               </>
