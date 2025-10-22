@@ -2,6 +2,8 @@
 
 .header {
   z-index: calc(var(--z-drawer) + 1);
+  background-color: #F5F5F5 !important;
+  color: rgba(0, 0, 0, 0.87) !important;
 }
 
 /* Mobile: Hamburger visible, compact spacing */
