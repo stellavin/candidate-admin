@@ -1,5 +1,26 @@
 /* Modern Professional Sidebar */
 
+:root {
+  /* Sidebar Theme Variables */
+  --sidebar-background: #D5D0FE;
+  --sidebar-brand-text: #5B21B6;
+  --sidebar-nav-padding: 12px 16px;
+  --sidebar-nav-min-height: 48px;
+  --sidebar-nav-border-radius: 8px;
+  --sidebar-nav-margin: 0 0 4px;
+  --sidebar-active-background: rgba(139, 92, 246, 0.12);
+  --sidebar-active-border-left: 4px solid #8B5CF6;
+  --sidebar-active-text-color: #8B5CF6;
+  --sidebar-hover-background: rgba(139, 92, 246, 0.08);
+  --sidebar-hover-border-left: 2px solid rgba(139, 92, 246, 0.3);
+  --sidebar-icon-size: 24px;
+  --sidebar-icon-font-size: 20px;
+  --sidebar-font-family: "Inter", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif;
+  --sidebar-font-size: 0.875rem;
+  --sidebar-font-weight-normal: 500;
+  --sidebar-font-weight-active: 600;
+}
+
 .drawer {
   width: var(--drawer-width);
   flex-shrink: 0;
@@ -8,7 +29,7 @@
 .drawerPaper {
   width: var(--drawer-width);
   box-sizing: border-box;
-  background: #D5D0FE;
+  background: var(--sidebar-background);
   border-right: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 2px 0 12px rgba(0, 0, 0, 0.04);
 }
@@ -24,7 +45,7 @@
 .brandSection {
   padding: 24px 20px 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-  background: #D5D0FE;
+  background: var(--sidebar-background);
   color: #333;
 }
 
@@ -39,11 +60,11 @@
 }
 
 .logoText {
-  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--sidebar-font-family) !important;
   font-size: 1.5rem !important;
   font-weight: 800 !important;
   letter-spacing: 0.05em !important;
-  color: #5B21B6 !important;
+  color: var(--sidebar-brand-text) !important;
   text-transform: none;
   text-align: center;
   margin: 0 !important;
@@ -82,13 +103,13 @@
 
 /* Navigation Items */
 .navItem {
-  border-radius: 8px !important;
-  margin: 0 0 4px !important;
-  padding: 12px 16px !important;
-  min-height: 48px !important;
+  border-radius: var(--sidebar-nav-border-radius) !important;
+  margin: var(--sidebar-nav-margin) !important;
+  padding: var(--sidebar-nav-padding) !important;
+  min-height: var(--sidebar-nav-min-height) !important;
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
   position: relative !important;
-  font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  font-family: var(--sidebar-font-family) !important;
   overflow: hidden !important;
   display: flex !important;
   align-items: center !important;
@@ -110,10 +131,10 @@
 }
 
 .navItem:hover {
-  background: rgba(139, 92, 246, 0.08) !important;
+  background: var(--sidebar-hover-background) !important;
   transform: translateX(2px);
   box-shadow: 0 2px 12px rgba(139, 92, 246, 0.12);
-  border-left: 2px solid rgba(139, 92, 246, 0.3);
+  border-left: var(--sidebar-hover-border-left);
 }
 
 .navItem:hover::before {
@@ -122,12 +143,12 @@
 }
 
 .navItem.active {
-  background: rgba(139, 92, 246, 0.12) !important;
-  color: #8B5CF6 !important;
+  background: var(--sidebar-active-background) !important;
+  color: var(--sidebar-active-text-color) !important;
   box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
   transform: translateX(0) !important;
-  border-left: 4px solid #8B5CF6 !important;
-  font-weight: 600 !important;
+  border-left: var(--sidebar-active-border-left) !important;
+  font-weight: var(--sidebar-font-weight-active) !important;
 }
 
 .navItem.active::before {
@@ -142,12 +163,12 @@
 }
 
 .icon {
-  min-width: 24px !important;
-  width: 24px !important;
-  height: 24px !important;
+  min-width: var(--sidebar-icon-size) !important;
+  width: var(--sidebar-icon-size) !important;
+  height: var(--sidebar-icon-size) !important;
   color: rgba(0, 0, 0, 0.6);
   transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-  font-size: 20px !important;
+  font-size: var(--sidebar-icon-font-size) !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -156,7 +177,7 @@
 }
 
 .activeIcon {
-  color: #8B5CF6 !important;
+  color: var(--sidebar-active-text-color) !important;
   transform: scale(1.1);
 }
 
@@ -166,12 +187,12 @@
 }
 
 .navItem.active .icon {
-  color: #8B5CF6 !important;
+  color: var(--sidebar-active-text-color) !important;
 }
 
 .navItem span {
-  font-size: 0.875rem !important;
-  font-weight: 500 !important;
+  font-size: var(--sidebar-font-size) !important;
+  font-weight: var(--sidebar-font-weight-normal) !important;
   letter-spacing: -0.01em !important;
   display: flex !important;
   align-items: center !important;
@@ -181,8 +202,8 @@
 }
 
 .navItem.active span {
-  font-weight: 600 !important;
-  color: #8B5CF6 !important;
+  font-weight: var(--sidebar-font-weight-active) !important;
+  color: var(--sidebar-active-text-color) !important;
 }
 
 /* Spacer to push bottom nav down */

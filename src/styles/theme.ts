@@ -33,6 +33,37 @@ export const tokens = {
     },
     containerMaxWidth: 1440,
   },
+  sidebar: {
+    background: '#D5D0FE',
+    brandText: '#5B21B6',
+    navItem: {
+      padding: '12px 16px',
+      minHeight: '48px',
+      borderRadius: '8px',
+      margin: '0 0 4px',
+    },
+    active: {
+      background: 'rgba(139, 92, 246, 0.12)',
+      borderLeft: '4px solid #8B5CF6',
+      textColor: '#8B5CF6',
+    },
+    hover: {
+      background: 'rgba(139, 92, 246, 0.08)',
+      borderLeft: '2px solid rgba(139, 92, 246, 0.3)',
+    },
+    icon: {
+      size: '24px',
+      fontSize: '20px',
+    },
+    typography: {
+      fontFamily: '"Inter", "Roboto", -apple-system, BlinkMacSystemFont, sans-serif',
+      fontSize: '0.875rem',
+      fontWeight: {
+        normal: 500,
+        active: 600,
+      },
+    },
+  },
   // Mobile-first breakpoints (matches MUI)
   breakpoints: {
     xs: 0,      // Mobile phones
